@@ -1,0 +1,120 @@
+The rule of thumb (do this)
+	•	Don’t typeset equations inside figure captions (most journals dislike it).
+	•	Do: put each equation in the Theoretical Framework section, immediately before or after the figure that visualizes it, and refer to the figure in the sentence introducing the equation.
+	•	In Methods/Results, cite the equations and figures again when you show data.
+
+⸻
+
+Figure–Equation map (what goes where)
+
+Fig. 1 — Skewed aperture geometry & coordinates
+
+Panels:
+(a) Global vs aperture frame; yaw (φ), pitch (ψ).
+(b) Shear (κx, κy) shown on the aperture edges.
+(c) Solid-angle cone seen by the aperture.
+
+Equation placed with this figure: Eq. (6) Escape flux integral
+	•	Placement: In the subsection “Escape integral,” introduce Fig. 1, then display Eq. (6) right after the first paragraph describing the geometry.
+	•	Caption (template):
+Fig. 1. Skewed aperture geometry and coordinate frames used to evaluate the escape flux in Eq. (6): (a) yaw φ and pitch ψ, (b) shear κx, κy, (c) aperture solid-angle view.
+
+In-text cue (Word):
+“Figure 1 defines the rotated/sheared aperture and its solid-angle view. The transmitted illuminance is given by the escape integral in Eq. (6).”
+
+⸻
+
+Fig. 2 — Seven-source anisotropic ambient basis
+
+Panels:
+(a) Hemispherical lobe diagram with 7 directional sources (zenith + 6 azimuthal).
+(b) Table inset with I_i, \theta_i, T_i (example values).
+
+Equation placed with this figure: Eq. (8) Discrete seven-source sum
+	•	Placement: Subsection “Anisotropic ambient decomposition”—reference Fig. 2, then present Eq. (8).
+	•	Caption:
+Fig. 2. Seven-direction basis used to approximate ambient anisotropy (Eq. 8). Zenith source captures high-angle diffuse; six lateral sectors cover the horizon.
+
+In-text cue:
+“As illustrated in Fig. 2, we approximate the hemisphere with seven sources; the predicted illuminance sums as in Eq. (8).”
+
+⸻
+
+Fig. 3 — Glint geometry & gain
+
+Panels:
+(a) Incidence angle θ on a glossy/glazing surface; grazing regime highlighted.
+(b) Plot of G_{\text{glint}}(\theta)=1+F_0(\sec\theta-1) vs θ with F_0 examples.
+(c) (Optional) Photo/diagram of a measured glint stripe.
+
+Equation placed with this figure: Eq. (9) Fresnel-style glint gain (and optional (9a) combined form)
+	•	Placement: Subsection “Glint amplification”—introduce Fig. 3, then display Eq. (9); if you use the split-sum form that applies gain only to glint-active directions, show Eq. (9a) immediately after.
+	•	Caption:
+Fig. 3. Glint geometry and angular gain (Eq. 9). Grazing incidence increases reflectance/gain, elevating contributions for glint-active directions.
+
+In-text cue:
+“Fig. 3 shows the grazing-angle amplification; we model it with Eq. (9), applied to the subset \mathcal{G} (Eq. 9a).”
+
+⸻
+
+Fig. 4 — Real-world modifiers (occlusion/reflectance/transmissivity)
+
+Panels:
+(a) Recess depth and wall occlusion schematic.
+(b) Angle-dependent transmissivity T_i(\theta) example.
+(c) Internal reflectance bounce sketch.
+(d) Bar chart of fitted M_k for a scenario.
+
+Equation placed with this figure: Eq. (7) Multiplicative modifiers
+	•	Placement: Subsection “Empirical modifiers”—refer to Fig. 4’s mechanisms, then present Eq. (7).
+	•	Caption:
+Fig. 4. Physical effects represented by modifiers in Eq. (7): wall occlusion, glazing/transmissivity, and internal reflectance.
+
+In-text cue:
+“As in Fig. 4, recess and material effects are captured by multiplicative factors M_k in Eq. (7).”
+
+⸻
+
+Methods/Results figures (equations are cited, not displayed)
+
+Fig. 5 — Experimental setup photo
+	•	Bench, coil/PSU/buck modules, sensors, aperture rig labeled.
+	•	Text: cite Eqs. (6)–(9) as the predictive core the bench tests.
+
+Fig. 6 — Illuminance: predicted vs measured
+	•	Scatter with 1:1 line, MAPE, R^2, error bars.
+	•	Text: “Predictions use Eq. (8) with modifiers Eq. (7); geometry per Eq. (6); glint per Eq. (9) when applicable.”
+
+Fig. 7 — Thermal: predicted vs measured
+	•	Similar scatter or time series to steady state.
+	•	Text: cite Eq. (6)/(8) analog for thermal (or note reuse of the same directional framework with H_i, T_i^{(\text{thermal})}) and modifiers Eq. (7).
+
+Fig. 8 — Acoustic: predicted vs measured
+	•	SPL comparison; note angle-dependent damping factor (your D(\theta,\phi) described in text).
+	•	Text: cite the discrete sum analogy and geometry per Fig. 1; no new equation needed here.
+
+Fig. 9 — Combined scenario
+	•	Bar or radar chart showing light/∆T/SPL predicted vs measured for one geometry.
+	•	Text: explicitly cite all four equations as the superposition recipe.
+
+⸻
+
+Concrete placement recipe (Word)
+	1.	Theory section layout (the four key pairs):
+	•	Paragraph introducing Fig. 1 → insert Fig. 1 (caption) → next paragraph ends with “given by Eq. (6)” → display Eq. (6).
+	•	Paragraph introducing Fig. 2 → insert Fig. 2 → next paragraph → display Eq. (8).
+	•	Paragraph introducing Fig. 3 → insert Fig. 3 → next paragraph → display Eq. (9) (+ 9a if used).
+	•	Paragraph introducing Fig. 4 → insert Fig. 4 → next paragraph → display Eq. (7).
+	2.	Cross-refs: Use Word’s References → Cross-reference to insert “Eq. (6)”/“Fig. 1” links everywhere you mention them.
+	3.	Captions: Keep captions descriptive but short; no equations inside captions. End captions with “… used in Eq. (6)/(8)/(9)” if you want an extra pointer.
+
+⸻
+
+One-liner captions you can paste
+	•	Fig. 1: Skewed aperture geometry and frames (yaw φ, pitch ψ, shear κx, κy) defining the solid angle used in Eq. (6).
+	•	Fig. 2: Seven-direction ambient basis (zenith + six azimuthal sectors) used in the discrete sum of Eq. (8).
+	•	Fig. 3: Glint geometry and angular gain; grazing angles increase contribution as modeled by Eq. (9).
+	•	Fig. 4: Physical effects represented by modifiers in Eq. (7): wall occlusion, angular transmissivity, internal reflectance.
+	•	Fig. 5: Experimental rig with adjustable aperture, sources, and sensors used for validation.
+	•	Fig. 6–8: Predicted vs. measured illuminance/thermal/SPL; predictions from Eqs. (6)–(9).
+	•	Fig. 9: Combined scenario (light/thermal/acoustic): model vs. measurements using Eqs. (6)–(9).

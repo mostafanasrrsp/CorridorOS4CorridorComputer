@@ -58,14 +58,42 @@
     <string name="android_platform">Android</string>
     
     <!-- Features -->
-    <string name="feature_physics_title">Physics Decoder</string>
+    <string name="feature_evolution_title">Evolution Game</string>
+    <string name="feature_evolution_desc">Guide life from primordial soup to space civilization using real physics principles</string>
+    <string name="feature_physics_title">Physics Calculator</string>
     <string name="feature_physics_desc">Interactive implementation of the unified physics formula with real-time calculations</string>
-    <string name="feature_optical_title">Optical Computing</string>
-    <string name="feature_optical_desc">Visualizations of wavelength division multiplexing and optical processing concepts</string>
     <string name="feature_benchmark_title">Performance Benchmarks</string>
-    <string name="feature_benchmark_desc">Real-time performance monitoring and comparison with theoretical optical computing</string>
-    <string name="feature_mobile_title">Mobile Optimization</string>
-    <string name="feature_mobile_desc">Optimized for Android with hardware acceleration and efficient battery usage</string>
+    <string name="feature_benchmark_desc">Real-time performance monitoring and evolutionary fitness calculations</string>
+    <string name="feature_education_title">Scientific Learning</string>
+    <string name="feature_education_desc">Learn evolutionary biology and physics through engaging interactive gameplay</string>
+    
+    <!-- Game strings -->
+    <string name="evolution_game">Evolution Game</string>
+    <string name="start_evolution">Start Evolution!</string>
+    <string name="advance_evolution">Advance Evolution</string>
+    <string name="reset_game">Reset Game</string>
+    <string name="tutorial">Tutorial</string>
+    <string name="achievements">Achievements</string>
+    <string name="game_statistics">Game Statistics</string>
+    
+    <!-- Evolution stages -->
+    <string name="primordial_soup">Primordial Soup</string>
+    <string name="simple_cells">Simple Cells</string>
+    <string name="complex_organisms">Complex Organisms</string>
+    <string name="intelligence_emergence">Intelligence Emergence</string>
+    <string name="civilization">Civilization</string>
+    <string name="space_age">Space Age</string>
+    
+    <!-- Game mechanics -->
+    <string name="population_growth">Population Growth</string>
+    <string name="adaptation_speed">Adaptation Speed</string>
+    <string name="mutation_rate">Mutation Rate</string>
+    <string name="selection_pressure">Selection Pressure</string>
+    <string name="intelligence_focus">Intelligence Focus</string>
+    
+    <!-- Free game messaging -->
+    <string name="free_game">Free • No Ads • Open Science</string>
+    <string name="educational_game">Educational • Scientific • Fun</string>
     
     <!-- Errors -->
     <string name="error_invalid_input">Invalid input value</string>

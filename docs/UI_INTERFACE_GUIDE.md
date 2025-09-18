@@ -596,3 +596,4 @@ class WavelengthSlider(
 *"Interface at the Speed of Light"* - Corridor Computer OS UI Team
 
 
+

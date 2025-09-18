@@ -1,0 +1,18 @@
+Item,Category,Description,Part Number,Qty,Notes
+Chassis,Mechanical,"14"" carbon lid + Mg deck, matte PVD hinge",TBD,1,312×220×15 mm
+Hinge,Mechanical,"Dual hinge, 180° capable",TBD,1,Torque 0.35–0.5 N·m
+Display,Electrical,"14.0"" 2560×1600 120 Hz matte, 500 nits",TBD,1,eDP 40‑pin
+Mainboard,Electrical,x86‑64/ARM board with LPDDR5X,TBD,1,45–60 W envelope
+Cooling,Thermal,Dual vapor chamber + dual fans,TBD,1,Rear exhaust
+Battery,Electrical,63–72 Wh Li‑poly,TBD,1,4‑cell
+Keyboard,Mechanical/Electrical,Scissor 1.5 mm; dedicated ⌘K,TBD,1,Backlit
+Trackpad,Electrical,Haptic glass 130×80,TBD,1,
+Photonic Bay,Electrical,Silicon‑photonic mezzanine connector,TBD,1,20–30 W
+Optical Bulkhead,Optics,"2× LC duplex, recessed with caps",TBD,1,OPT‑A/OPT‑B
+ALS Sensor,Sensors,Ambient light sensor (ALS),TBD,1,HELIOPASS input
+IMU,Sensors,9‑axis IMU,TBD,1,HELIOPASS geometry
+Microphones,Sensors,Dual digital MEMS mics,TBD,2,Beamforming
+Speakers,Electrical,Stereo speakers,TBD,2,
+Wi‑Fi/BT,Electrical,Wi‑Fi 7 + BT 5.4 module,TBD,1,M.2 key‑E
+Storage,Electrical,NVMe SSD 1–2 TB,TBD,1,M.2 2280
+Ports,Electrical,"USB4/TB4, HDMI 2.1, USB‑A, uSD, 3.5 mm",TBD,1,As per I/O spec
