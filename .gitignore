@@ -339,3 +339,4 @@ $RECYCLE.BIN/
 # Keep git configuration
 !.gitignore
 !.gitattributes
+PACC/
