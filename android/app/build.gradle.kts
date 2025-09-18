@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.corridor.os.android"
+    namespace = "com.corridor.evolutiondecoder"
     compileSdk = 34
 
     defaultConfig {
