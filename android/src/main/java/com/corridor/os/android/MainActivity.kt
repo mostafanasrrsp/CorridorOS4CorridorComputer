@@ -24,6 +24,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.corridor.os.android.ui.theme.CorridorOSTheme
 import com.corridor.os.android.ui.screens.PhysicsScreen
 import com.corridor.os.android.ui.screens.BenchmarkScreen
+import com.corridor.os.android.ui.screens.EvolutionGameScreen
 import com.corridor.os.android.viewmodel.MainViewModel
 
 class MainActivity : ComponentActivity() {
@@ -50,7 +51,7 @@ fun MainScreen(
     viewModel: MainViewModel = viewModel()
 ) {
     var selectedTab by remember { mutableIntStateOf(0) }
-    val tabs = listOf("Home", "Physics", "Optical", "Benchmarks")
+    val tabs = listOf("Home", "Physics", "Evolution", "Benchmarks")
     
     Scaffold(
         topBar = {
@@ -76,7 +77,7 @@ fun MainScreen(
                                 when (index) {
                                     0 -> Icons.Default.Home
                                     1 -> Icons.Default.Calculate
-                                    2 -> Icons.Default.Visibility
+                                    2 -> Icons.Default.Biotech
                                     3 -> Icons.Default.Speed
                                     else -> Icons.Default.Info
                                 },
@@ -99,7 +100,7 @@ fun MainScreen(
             when (selectedTab) {
                 0 -> HomeScreen()
                 1 -> PhysicsScreen(viewModel)
-                2 -> OpticalScreen()
+                2 -> EvolutionGameScreen()
                 3 -> BenchmarkScreen(viewModel)
             }
         }
@@ -154,7 +155,7 @@ fun WelcomeCard() {
             )
             Spacer(modifier = Modifier.height(16.dp))
             Text(
-                "Welcome to Corridor OS Mobile",
+                "Evolution Decoder",
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onPrimaryContainer,
@@ -162,7 +163,7 @@ fun WelcomeCard() {
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                "Optical Computing • Physics Decoder • Mobile Performance",
+                "The Physics of Life • Evolution Game • Scientific Discovery",
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onPrimaryContainer,
                 textAlign = TextAlign.Center
@@ -372,23 +373,23 @@ data class FeatureInfo(
 
 fun getFeatureCards(): List<FeatureInfo> = listOf(
     FeatureInfo(
-        "Physics Decoder",
+        "Evolution Game",
+        "Guide life from primordial soup to space civilization using the physics decoder formula",
+        Icons.Default.Biotech
+    ),
+    FeatureInfo(
+        "Physics Calculator",
         "Interactive implementation of the unified physics formula with real-time calculations",
         Icons.Default.Calculate
     ),
     FeatureInfo(
-        "Optical Computing",
-        "Visualizations of wavelength division multiplexing and optical processing concepts",
-        Icons.Default.Visibility
-    ),
-    FeatureInfo(
         "Performance Benchmarks",
-        "Real-time performance monitoring and comparison with theoretical optical computing",
+        "Real-time performance monitoring and evolutionary fitness calculations",
         Icons.Default.Speed
     ),
     FeatureInfo(
-        "Mobile Optimization",
-        "Optimized for Android with hardware acceleration and efficient battery usage",
-        Icons.Default.PhoneAndroid
+        "Scientific Discovery",
+        "Discover how physics principles govern evolution and the emergence of life",
+        Icons.Default.Science
     )
 )

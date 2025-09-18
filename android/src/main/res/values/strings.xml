@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Corridor OS Mobile</string>
+    <string name="app_name">Evolution Decoder</string>
     <string name="physics_calculator">Physics Calculator</string>
     <string name="optical_visualizer">Optical Visualizer</string>
     <string name="performance_benchmark">Performance Benchmark</string>
