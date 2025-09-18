@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Corridor OS Color Palette -->
+    <color name="corridor_blue">#1E88E5</color>
+    <color name="corridor_blue_light">#E3F2FD</color>
+    <color name="corridor_blue_dark">#0D47A1</color>
+    
+    <color name="corridor_cyan">#00ACC1</color>
+    <color name="corridor_cyan_light">#E0F2F1</color>
+    <color name="corridor_cyan_dark">#004D40</color>
+    
+    <color name="corridor_teal">#00897B</color>
+    <color name="corridor_teal_light">#E0F2F1</color>
+    <color name="corridor_teal_dark">#004D40</color>
+    
+    <color name="corridor_green">#43A047</color>
+    <color name="corridor_green_light">#E8F5E8</color>
+    <color name="corridor_green_dark">#1B5E20</color>
+    
+    <color name="corridor_purple">#8E24AA</color>
+    <color name="corridor_purple_light">#E1BEE7</color>
+    <color name="corridor_purple_dark">#4A148C</color>
+    
+    <color name="corridor_indigo">#3949AB</color>
+    <color name="corridor_indigo_light">#E8EAF6</color>
+    <color name="corridor_indigo_dark">#1A237E</color>
+    
+    <!-- Standard colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+    
+    <!-- Background colors -->
+    <color name="background_light">#FAFAFA</color>
+    <color name="background_dark">#0E0E0E</color>
+    <color name="surface_light">#FFFFFF</color>
+    <color name="surface_dark">#1C1B1F</color>
+</resources>

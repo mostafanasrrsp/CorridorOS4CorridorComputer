@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data-extraction-rules>
+    <cloud-backup>
+        <!-- Physics calculation results can be backed up -->
+        <include domain="sharedpref" path="physics_results"/>
+        <include domain="sharedpref" path="user_preferences"/>
+        
+        <!-- Exclude sensitive performance data -->
+        <exclude domain="sharedpref" path="benchmark_data"/>
+        <exclude domain="sharedpref" path="system_metrics"/>
+    </cloud-backup>
+    
+    <device-transfer>
+        <!-- Allow transfer of user preferences -->
+        <include domain="sharedpref" path="user_preferences"/>
+        
+        <!-- Exclude device-specific data -->
+        <exclude domain="sharedpref" path="benchmark_data"/>
+        <exclude domain="sharedpref" path="system_metrics"/>
+        <exclude domain="sharedpref" path="performance_cache"/>
+    </device-transfer>
+</data-extraction-rules>

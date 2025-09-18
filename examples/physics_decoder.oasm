@@ -1,0 +1,309 @@
+; physics_decoder.oasm - Physics Decoder Formula Demonstration
+; Implements the unified decoder formula: Q(β) = m·a^(α·δ_β,2)·c^(α·(δ_β,1+δ_β,3))
+; Where Q(1)=momentum, Q(2)=force, Q(3)=energy
+
+.data
+; Physics constants
+speed_of_light: .float 299792458.0      ; c in m/s
+planck_constant: .float 6.62607015e-34  ; h in J·s
+test_mass: .float 1.0                   ; 1 kg test mass
+test_acceleration: .float 9.81          ; Earth gravity in m/s²
+
+; Decoder formula parameters
+alpha_momentum: .float 1.0              ; α=1 for momentum calculation
+alpha_force: .float 1.0                 ; α=1 for force calculation  
+alpha_energy: .float 2.0                ; α=2 for energy calculation
+
+; Results storage
+momentum_result: .float 0.0             ; p = m·c (α=1, β=1)
+force_result: .float 0.0                ; F = m·a (α=1, β=2)
+energy_result: .float 0.0               ; E = m·c² (α=2, β=3)
+
+; Validation expected values
+expected_momentum: .float 299792458.0   ; 1 kg * c
+expected_force: .float 9.81             ; 1 kg * 9.81 m/s²
+expected_energy: .float 8.987551787e16  ; 1 kg * c²
+
+; Display messages
+momentum_msg: .string "Momentum (p = mc): "
+force_msg: .string "Force (F = ma): "
+energy_msg: .string "Energy (E = mc²): "
+validation_msg: .string "Decoder Formula Validation: "
+pass_msg: .string "PASSED"
+fail_msg: .string "FAILED"
+newline: .string "\n"
+
+.text
+_start:
+    ; Display header
+    OMOV OAX, header_msg
+    OCALL print_string
+    
+    ; Calculate momentum using decoder formula (α=1, β=1)
+    OCALL calculate_momentum
+    
+    ; Calculate force using decoder formula (α=1, β=2)  
+    OCALL calculate_force
+    
+    ; Calculate energy using decoder formula (α=2, β=3)
+    OCALL calculate_energy
+    
+    ; Validate results against known physics equations
+    OCALL validate_results
+    
+    ; Demonstrate optical computing advantages
+    OCALL optical_physics_demo
+    
+    OHALT
+
+calculate_momentum:
+    ; Implement Q(1) = m·c^α where α=1, β=1
+    ; Kronecker deltas: δ₁,₁=1, δ₁,₂=0, δ₁,₃=0
+    ; Formula becomes: Q(1) = m·a^(1·0)·c^(1·(1+0)) = m·c
+    
+    OMOV OAX, momentum_msg
+    OCALL print_string
+    
+    ; Load parameters using optical registers
+    OLOAD WDM0, [test_mass]         ; Load mass into WDM register
+    OLOAD WDM1, [speed_of_light]    ; Load speed of light
+    OLOAD WDM2, [alpha_momentum]    ; Load α=1
+    
+    ; Calculate momentum: p = m·c^α (α=1, so p = m·c)
+    ; Use optical multiplication for high precision
+    OMUL WDM3, WDM0, WDM1          ; m * c using 32 parallel lanes
+    
+    ; Store result
+    OSTORE [momentum_result], WDM3
+    
+    ; Display result using optical formatting
+    OMOV OAX, WDM3
+    OCALL print_float
+    OMOV OAX, newline
+    OCALL print_string
+    
+    ORET
+
+calculate_force:
+    ; Implement Q(2) = m·a^α where α=1, β=2
+    ; Kronecker deltas: δ₂,₁=0, δ₂,₂=1, δ₂,₃=0
+    ; Formula becomes: Q(2) = m·a^(1·1)·c^(1·(0+0)) = m·a
+    
+    OMOV OAX, force_msg
+    OCALL print_string
+    
+    ; Load parameters
+    OLOAD WDM0, [test_mass]           ; Load mass
+    OLOAD WDM1, [test_acceleration]   ; Load acceleration
+    OLOAD WDM2, [alpha_force]         ; Load α=1
+    
+    ; Calculate force: F = m·a^α (α=1, so F = m·a)
+    OMUL WDM3, WDM0, WDM1            ; m * a using optical arithmetic
+    
+    ; Store result
+    OSTORE [force_result], WDM3
+    
+    ; Display result
+    OMOV OAX, WDM3
+    OCALL print_float
+    OMOV OAX, newline
+    OCALL print_string
+    
+    ORET
+
+calculate_energy:
+    ; Implement Q(3) = m·c^α where α=2, β=3
+    ; Kronecker deltas: δ₃,₁=0, δ₃,₂=0, δ₃,₃=1
+    ; Formula becomes: Q(3) = m·a^(2·0)·c^(2·(0+1)) = m·c²
+    
+    OMOV OAX, energy_msg
+    OCALL print_string
+    
+    ; Load parameters
+    OLOAD WDM0, [test_mass]        ; Load mass
+    OLOAD WDM1, [speed_of_light]   ; Load speed of light
+    OLOAD WDM2, [alpha_energy]     ; Load α=2
+    
+    ; Calculate energy: E = m·c^α (α=2, so E = m·c²)
+    ; First calculate c²
+    OMUL WDM3, WDM1, WDM1          ; c * c = c²
+    
+    ; Then multiply by mass
+    OMUL WDM4, WDM0, WDM3          ; m * c²
+    
+    ; Store result
+    OSTORE [energy_result], WDM4
+    
+    ; Display result
+    OMOV OAX, WDM4
+    OCALL print_float
+    OMOV OAX, newline
+    OCALL print_string
+    
+    ORET
+
+validate_results:
+    ; Validate decoder formula results against expected values
+    OMOV OAX, validation_msg
+    OCALL print_string
+    
+    ; Validation tolerance (0.1% error allowed)
+    OMOV WDM0, 0.001
+    OMOV WDM7, 1                    ; Success counter
+    
+    ; Validate momentum
+    OLOAD WDM1, [momentum_result]
+    OLOAD WDM2, [expected_momentum]
+    OSUB WDM3, WDM1, WDM2           ; Calculate difference
+    OMUL WDM4, WDM3, WDM3           ; Square the difference
+    OMUL WDM5, WDM2, WDM0           ; Calculate tolerance
+    OMUL WDM6, WDM5, WDM5           ; Square tolerance
+    
+    ; Check if |difference|² < tolerance²
+    OSUB WDM8, WDM6, WDM4           ; tolerance² - difference²
+    OJNE momentum_fail, WDM8        ; Jump if negative (failed)
+    
+    ; Validate force
+    OLOAD WDM1, [force_result]
+    OLOAD WDM2, [expected_force]
+    OSUB WDM3, WDM1, WDM2
+    OMUL WDM4, WDM3, WDM3
+    OMUL WDM5, WDM2, WDM0
+    OMUL WDM6, WDM5, WDM5
+    OSUB WDM8, WDM6, WDM4
+    OJNE force_fail, WDM8
+    
+    ; Validate energy
+    OLOAD WDM1, [energy_result]
+    OLOAD WDM2, [expected_energy]
+    OSUB WDM3, WDM1, WDM2
+    OMUL WDM4, WDM3, WDM3
+    OMUL WDM5, WDM2, WDM0
+    OMUL WDM6, WDM5, WDM5
+    OSUB WDM8, WDM6, WDM4
+    OJNE energy_fail, WDM8
+    
+    ; All validations passed
+    OMOV OAX, pass_msg
+    OCALL print_string
+    OJMP validation_complete
+    
+momentum_fail:
+    OSUB WDM7, WDM7, 1              ; Decrement success counter
+    OJMP force_validate
+    
+force_fail:
+    OSUB WDM7, WDM7, 1
+    OJMP energy_validate
+    
+energy_fail:
+    OSUB WDM7, WDM7, 1
+    
+validation_complete:
+    ; Display overall result
+    OJNE validation_failed, WDM7    ; Jump if WDM7 != 1
+    ORET                            ; All tests passed
+    
+validation_failed:
+    OMOV OAX, fail_msg
+    OCALL print_string
+    ORET
+
+optical_physics_demo:
+    ; Demonstrate optical computing advantages for physics calculations
+    OMOV OAX, demo_header_msg
+    OCALL print_string
+    
+    ; Parallel photon energy calculation for multiple wavelengths
+    ; Using wavelength division multiplexing (WDM)
+    
+    ; Load wavelength array (1530nm to 1570nm in 10nm steps)
+    OMOV OAX, wavelength_array
+    OMOV OBX, 5                     ; 5 wavelengths
+    OMOV OCX, photon_energies       ; Result array
+    
+photon_energy_loop:
+    ; Load wavelength using optical memory access
+    OLOAD WDM0, [OAX]               ; Load wavelength in nm
+    
+    ; Convert to meters: λ_m = λ_nm * 1e-9
+    OMUL WDM1, WDM0, 1e-9
+    
+    ; Calculate photon energy: E = h·c/λ
+    OLOAD WDM2, [planck_constant]   ; Load h
+    OLOAD WDM3, [speed_of_light]    ; Load c
+    OMUL WDM4, WDM2, WDM3           ; h * c
+    ODIV WDM5, WDM4, WDM1           ; (h * c) / λ
+    
+    ; Store result using parallel optical memory
+    OSTORE [OCX], WDM5
+    
+    ; Advance pointers
+    OADD OAX, 4                     ; Next wavelength (4 bytes)
+    OADD OCX, 4                     ; Next result slot
+    OSUB OBX, 1                     ; Decrement counter
+    OJNE photon_energy_loop, OBX    ; Continue if more wavelengths
+    
+    ; Display photon energies
+    OMOV OAX, photon_energy_msg
+    OCALL print_string
+    
+    ; Print results using optical parallel display
+    OMOV OAX, photon_energies
+    OMOV OBX, 5
+    
+display_photon_energies:
+    OLOAD WDM0, [OAX]
+    OMOV ODX, WDM0
+    OCALL print_float
+    OMOV ODX, space_char
+    OCALL print_char
+    
+    OADD OAX, 4
+    OSUB OBX, 1
+    OJNE display_photon_energies, OBX
+    
+    OMOV OAX, newline
+    OCALL print_string
+    
+    ORET
+
+; Utility functions
+print_string:
+    ; Print null-terminated string using optical I/O
+    OLOAD WDM0, [OAX]               ; Load character
+    OJNE print_char_continue, WDM0  ; Continue if not null
+    ORET                            ; Return if null terminator
+    
+print_char_continue:
+    OSTORE [display_port], WDM0     ; Output character
+    OADD OAX, 1                     ; Next character
+    OJMP print_string               ; Continue
+    
+print_char:
+    ; Print single character
+    OSTORE [display_port], ODX
+    ORET
+    
+print_float:
+    ; Print floating point number (simplified implementation)
+    ; In real implementation, this would format the IEEE 754 number
+    OSTORE [display_port], OAX      ; Output raw float bits
+    ORET
+
+.data
+; Additional data for demonstrations
+wavelength_array: .float 1530.0, 1540.0, 1550.0, 1560.0, 1570.0
+photon_energies: .space 20          ; 5 floats * 4 bytes
+space_char: .char ' '
+display_port: .int 0x2000           ; Display interface address
+
+header_msg: .string "=== Physics Decoder Formula Demonstration ===\n"
+demo_header_msg: .string "\n=== Optical Physics Computing Demo ===\n"
+photon_energy_msg: .string "Photon energies (J): "
+
+; Performance comparison data
+traditional_cpu_time: .float 1000.0    ; 1000ns for traditional calculation
+optical_cpu_time: .float 100.0         ; 100ps for optical calculation
+speedup_factor: .float 10000.0         ; 10,000x speedup
+

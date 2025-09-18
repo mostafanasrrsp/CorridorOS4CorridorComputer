@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Corridor OS Mobile</string>
+    <string name="physics_calculator">Physics Calculator</string>
+    <string name="optical_visualizer">Optical Visualizer</string>
+    <string name="performance_benchmark">Performance Benchmark</string>
+    
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_physics">Physics</string>
+    <string name="nav_optical">Optical</string>
+    <string name="nav_benchmarks">Benchmarks</string>
+    
+    <!-- Physics Screen -->
+    <string name="decoder_formula">Q(β) = m · a^(α·δ_β,2) · c^(α·(δ_β,1+δ_β,3))</string>
+    <string name="formula_description">One formula, three fundamental physics laws</string>
+    
+    <!-- Physics Types -->
+    <string name="momentum">Momentum</string>
+    <string name="force">Force</string>
+    <string name="energy">Energy</string>
+    <string name="momentum_formula">p = mc</string>
+    <string name="force_formula">F = ma</string>
+    <string name="energy_formula">E = mc²</string>
+    
+    <!-- Input Parameters -->
+    <string name="alpha_parameter">Alpha (α)</string>
+    <string name="mass_parameter">Mass (m)</string>
+    <string name="acceleration_parameter">Acceleration (a)</string>
+    <string name="alpha_description_momentum">α=1 for momentum (p = mc)</string>
+    <string name="alpha_description_force">α=1 for force (F = ma)</string>
+    <string name="alpha_description_energy">α=2 for energy (E = mc²)</string>
+    <string name="mass_unit">Mass in kilograms</string>
+    <string name="acceleration_unit">Acceleration in m/s²</string>
+    
+    <!-- Buttons -->
+    <string name="calculate">Calculate</string>
+    <string name="calculating">Calculating...</string>
+    <string name="validate">Validate</string>
+    <string name="revalidate">Revalidate</string>
+    <string name="clear_results">Clear Results</string>
+    
+    <!-- Status Messages -->
+    <string name="formula_validated">Formula Validated</string>
+    <string name="validation_failed">Validation Failed</string>
+    <string name="validating">Validating...</string>
+    <string name="tests_completed">%d tests completed</string>
+    
+    <!-- Units -->
+    <string name="unit_momentum">kg⋅m/s</string>
+    <string name="unit_force">N</string>
+    <string name="unit_energy">J</string>
+    
+    <!-- System Info -->
+    <string name="cpu_cores">CPU Cores</string>
+    <string name="max_memory">Max Memory</string>
+    <string name="target_platform">Target</string>
+    <string name="android_platform">Android</string>
+    
+    <!-- Features -->
+    <string name="feature_physics_title">Physics Decoder</string>
+    <string name="feature_physics_desc">Interactive implementation of the unified physics formula with real-time calculations</string>
+    <string name="feature_optical_title">Optical Computing</string>
+    <string name="feature_optical_desc">Visualizations of wavelength division multiplexing and optical processing concepts</string>
+    <string name="feature_benchmark_title">Performance Benchmarks</string>
+    <string name="feature_benchmark_desc">Real-time performance monitoring and comparison with theoretical optical computing</string>
+    <string name="feature_mobile_title">Mobile Optimization</string>
+    <string name="feature_mobile_desc">Optimized for Android with hardware acceleration and efficient battery usage</string>
+    
+    <!-- Errors -->
+    <string name="error_invalid_input">Invalid input value</string>
+    <string name="error_calculation_failed">Calculation failed</string>
+    <string name="error_validation_failed">Validation failed</string>
+</resources>

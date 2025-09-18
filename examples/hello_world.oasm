@@ -1,0 +1,58 @@
+; hello_world.oasm - Hello World in Optical Assembly
+; Demonstrates basic optical computing operations
+
+.data
+msg: .string "Hello, Optical World!"
+msg_len: .int 22
+
+.text
+_start:
+    ; Load message parameters
+    OMOV OAX, msg           ; Load message address into optical register
+    OMOV OBX, msg_len       ; Load message length
+    
+    ; Call print function using optical call instruction
+    OCALL print_string
+    
+    ; Demonstrate optical arithmetic
+    OMOV OAX, 42            ; Load first number
+    OMOV OBX, 24            ; Load second number
+    OADD OCX, OAX, OBX      ; Optical addition (42 + 24 = 66)
+    
+    ; Store result in holographic memory
+    OSTORE [result_addr], OCX
+    
+    ; Halt the optical system
+    OHALT
+
+print_string:
+    ; Print string using optical I/O with parallel processing
+    OMOV OCX, 0             ; Initialize counter
+    
+print_loop:
+    ; Load character using holographic memory access
+    OLOAD ODX, [OAX + OCX]  ; Load character at offset
+    
+    ; Check for null terminator
+    OJNE continue_print, ODX ; Jump if not zero
+    ORET                    ; Return if end of string
+    
+continue_print:
+    ; Output character to display interface
+    OSTORE [display_port], ODX
+    
+    ; Increment counter and pointer
+    OADD OCX, 1             ; Increment counter
+    OADD OAX, 1             ; Next character
+    
+    ; Check if we've printed all characters
+    OSUB OBX, 1             ; Decrement remaining count
+    OJNE print_loop, OBX    ; Continue if more characters
+    
+    ORET                    ; Return from function
+
+.data
+result_addr: .int 0x1000    ; Address to store arithmetic result
+display_port: .int 0x2000   ; Display interface address
+
+

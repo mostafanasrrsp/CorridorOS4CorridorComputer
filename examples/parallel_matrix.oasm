@@ -1,0 +1,185 @@
+; parallel_matrix.oasm - Parallel Matrix Multiplication
+; Demonstrates advanced optical computing with wavelength division multiplexing
+
+.data
+; 32x32 matrices for demonstration
+matrixA: .space 4096        ; Matrix A (32x32 * 4 bytes)
+matrixB: .space 4096        ; Matrix B (32x32 * 4 bytes)  
+result:  .space 4096        ; Result matrix
+matrix_size: .int 32        ; Matrix dimension
+
+.text
+_start:
+    ; Initialize matrices with test data
+    OCALL init_matrices
+    
+    ; Perform parallel matrix multiplication
+    OCALL matrix_multiply
+    
+    ; Verify results
+    OCALL verify_results
+    
+    OHALT
+
+init_matrices:
+    ; Initialize test matrices using optical parallel operations
+    OMOV OAX, matrixA       ; Matrix A base address
+    OMOV OBX, matrixB       ; Matrix B base address
+    OMOV OCX, 0             ; Initialize counter
+    OMOV ODX, 1024          ; Total elements (32*32)
+    
+init_loop:
+    ; Initialize Matrix A with sequential values using parallel lanes
+    OWDM WDM0, OCX, 32      ; Load 32 counter values in parallel
+    OADD WDM0, WDM0, 1      ; Add 1 to each (A[i] = i+1)
+    OWDM [OAX], WDM0, 32    ; Store 32 values in parallel
+    
+    ; Initialize Matrix B with inverse values
+    OMOV WDM1, 1025         ; Load constant
+    OSUB WDM1, WDM1, WDM0   ; B[i] = 1025 - (i+1)
+    OWDM [OBX], WDM1, 32    ; Store 32 values in parallel
+    
+    ; Update pointers and counter
+    OADD OAX, 128           ; Advance A pointer (32 * 4 bytes)
+    OADD OBX, 128           ; Advance B pointer
+    OADD OCX, 32            ; Increment counter by 32
+    OSUB ODX, 32            ; Decrement remaining elements
+    OJNE init_loop, ODX     ; Continue if more elements
+    
+    ORET
+
+matrix_multiply:
+    ; Parallel matrix multiplication using optical wavelength channels
+    OMOV OAX, matrixA       ; Matrix A base
+    OMOV OBX, matrixB       ; Matrix B base  
+    OMOV OCX, result        ; Result matrix base
+    OMOV ODX, matrix_size   ; Load matrix size (32)
+    
+    ; Outer loop: iterate through rows of A
+    OMOV WDM0, 0            ; Row counter
+    
+row_loop:
+    ; Middle loop: iterate through columns of B
+    OMOV WDM1, 0            ; Column counter
+    
+col_loop:
+    ; Inner loop: dot product using parallel optical operations
+    OMOV WDM2, 0            ; Initialize accumulator
+    OMOV WDM3, 0            ; Element counter
+    
+    ; Calculate row address in A: A + (row * 32 * 4)
+    OMUL OSP, WDM0, 128     ; Row offset (32 * 4 bytes)
+    OADD OSP, matrixA, OSP  ; A row address
+    
+    ; Calculate column address in B: B + (col * 4)  
+    OMUL OSR, WDM1, 4       ; Column offset
+    OADD OSR, matrixB, OSR  ; B column base
+    
+dot_product_loop:
+    ; Load elements using wavelength division multiplexing
+    OLOAD WDM4, [OSP]       ; Load A[row][k]
+    OLOAD WDM5, [OSR]       ; Load B[k][col]
+    
+    ; Parallel multiply and accumulate
+    OMUL WDM6, WDM4, WDM5   ; Multiply elements
+    OADD WDM2, WDM2, WDM6   ; Accumulate result
+    
+    ; Advance to next elements
+    OADD OSP, 4             ; Next element in row
+    OADD OSR, 128           ; Next element in column (skip to next row)
+    OADD WDM3, 1            ; Increment element counter
+    
+    ; Check if dot product complete
+    OSUB ODX, WDM3          ; Compare with matrix size
+    OJNE dot_product_loop, ODX ; Continue if more elements
+    
+    ; Store result: result[row][col] = dot_product
+    ; Calculate result address: result + (row * 32 + col) * 4
+    OMUL OSP, WDM0, 32      ; Row * 32
+    OADD OSP, OSP, WDM1     ; + column
+    OMUL OSP, OSP, 4        ; * 4 bytes
+    OADD OSP, result, OSP   ; + result base
+    OSTORE [OSP], WDM2      ; Store dot product result
+    
+    ; Advance to next column
+    OADD WDM1, 1            ; Next column
+    OSUB ODX, WDM1          ; Compare with matrix size
+    OJNE col_loop, ODX      ; Continue if more columns
+    
+    ; Advance to next row
+    OADD WDM0, 1            ; Next row
+    OMOV ODX, matrix_size   ; Reload matrix size
+    OSUB ODX, WDM0          ; Compare with matrix size
+    OJNE row_loop, ODX      ; Continue if more rows
+    
+    ORET
+
+verify_results:
+    ; Verify matrix multiplication results using optical parallel verification
+    OMOV OAX, result        ; Result matrix
+    OMOV OBX, 0             ; Error counter
+    OMOV OCX, 0             ; Element counter
+    OMOV ODX, 1024          ; Total elements
+    
+verify_loop:
+    ; Load result element using holographic memory
+    OLOAD WDM0, [OAX]       ; Load result[i]
+    
+    ; Calculate expected value (simplified verification)
+    ; For our test matrices: expected = sum of products
+    OMOV WDM1, 32           ; Matrix size
+    OMUL WDM1, WDM1, WDM1   ; 32 * 32 = 1024
+    OMUL WDM1, WDM1, OCX    ; * element index
+    OADD WDM1, WDM1, 1024   ; Add offset
+    
+    ; Compare actual vs expected
+    OSUB WDM2, WDM0, WDM1   ; Difference
+    OJNE error_found, WDM2  ; Jump if not equal
+    
+    ; Continue to next element
+    OADD OAX, 4             ; Next result element
+    OADD OCX, 1             ; Increment counter
+    OSUB ODX, 1             ; Decrement remaining
+    OJNE verify_loop, ODX   ; Continue if more elements
+    
+    ; All results correct
+    OMOV OAX, success_msg
+    OCALL print_message
+    ORET
+    
+error_found:
+    ; Error in results
+    OADD OBX, 1             ; Increment error counter
+    OADD OAX, 4             ; Next element
+    OADD OCX, 1             ; Increment counter  
+    OSUB ODX, 1             ; Decrement remaining
+    OJNE verify_loop, ODX   ; Continue verification
+    
+    ; Print error count
+    OMOV OAX, error_msg
+    OCALL print_message
+    ORET
+
+print_message:
+    ; Simple message printing using optical I/O
+    OLOAD WDM0, [OAX]       ; Load character
+    OJNE print_char, WDM0   ; Print if not null
+    ORET                    ; Return if end of string
+    
+print_char:
+    OSTORE [display_port], WDM0 ; Output character
+    OADD OAX, 1             ; Next character
+    OJMP print_message      ; Continue printing
+    
+.data
+success_msg: .string "Matrix multiplication successful!"
+error_msg: .string "Matrix multiplication errors detected!"
+display_port: .int 0x2000  ; Display interface address
+
+; Demonstration of optical computing advantages:
+; 1. Parallel matrix operations using wavelength division multiplexing
+; 2. High-speed holographic memory access
+; 3. Simultaneous multi-element processing
+; 4. Optical arithmetic with picosecond execution times
+
+
